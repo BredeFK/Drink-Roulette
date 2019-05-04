@@ -14,6 +14,7 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
 
+    // Declare arrayList with items and lastNumb
     private ArrayList<String> items = new ArrayList<>();
     private int lastNumb = -1;
 
@@ -22,36 +23,63 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Get view elements
         Button generate = findViewById(R.id.btnGenerate);
         final TextView number = findViewById(R.id.txtRandNumber);
 
-
+        // Set on click listener
         generate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // Get input
                 EditText editItems = findViewById(R.id.editItems);
+                String s = editItems.getText().toString();
 
-                items.clear();
-                items.addAll(Arrays.asList(editItems.getText().toString().split(",")));
+                // Make sure input is not empty
+                if (!s.isEmpty()) {
 
-                number.setText(items.get(getRandomNumber()));
+                    // Clear previous list and add new items
+                    items.clear();
+                    items.addAll(Arrays.asList(s.split(",")));
+
+                    number.setText(items.get(getRandomNumber()));
+                }
             }
         });
     }
 
+    // getRandomNumber Gets a random number and makes sure it's not the same as last
     int getRandomNumber() {
 
+        // Get random number
         SecureRandom random = new SecureRandom();
         Random rand = new Random();
+
+        // Add seed
         random.generateSeed(rand.nextInt(20));
+
+        // If only 1 item, index is always 0
         int length = items.size();
+        if (length == 1) {
+            return 0;
+        }
+
+        // Make sure new random number
         int n = random.nextInt(length);
+
+        // If there's only two, actually have random selection
+        if (length == 2) {
+            return n;
+        }
+
+        // If more than 2, make sure the new number is not the same as last TODO : add sound to better indicate new drink
         while (n == lastNumb) {
             n = random.nextInt(length);
         }
         lastNumb = n;
 
+        // Return number
         return n;
-
     }
 }

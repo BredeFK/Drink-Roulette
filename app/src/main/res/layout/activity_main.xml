@@ -47,7 +47,7 @@
         android:backgroundTint="@color/colorPrimary"
         android:backgroundTintMode="@color/colorPrimary"
         android:ems="10"
-        android:hint="@string/items"
+        android:hint="@string/separate"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
