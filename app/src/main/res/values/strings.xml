@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Drink Roulette</string>
+    <string name="generate">Generate</string>
+    <string name="items">Items</string>
+</resources>
