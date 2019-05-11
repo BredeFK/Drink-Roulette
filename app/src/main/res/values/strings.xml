@@ -3,4 +3,5 @@
     <string name="generate">Generate</string>
     <string name="items">Items</string>
     <string name="separate">Separate drinks with comma</string>
+    <string name="title_activity_scan_item">ScanItemActivity</string>
 </resources>
