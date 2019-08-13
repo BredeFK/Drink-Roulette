@@ -1,7 +1,9 @@
 package no.fritjof.drinkroulette;
 
+import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +29,21 @@ public class MainActivity extends AppCompatActivity {
         // Get view elements
         Button generate = findViewById(R.id.btnGenerate);
         final TextView number = findViewById(R.id.txtRandNumber);
+        final EditText editItems = findViewById(R.id.editItems);
+
+        // For sound effect
         final MediaPlayer sound = MediaPlayer.create(MainActivity.this, R.raw.glassping);
+
+        // For storing previous input
+        final SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        // Get possible previous input
+        final String input = preferences.getString("stringArray", "");
+
+        // Fill in previous input if it exists
+        if(!input.isEmpty()){
+            editItems.setText(input);
+        }
 
         // Set on click listener
         generate.setOnClickListener(new View.OnClickListener() {
@@ -35,8 +51,11 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 // Get input
-                EditText editItems = findViewById(R.id.editItems);
+
                 String s = editItems.getText().toString();
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.putString("stringArray", s);
+                editor.apply();
 
                 // Make sure input is not empty
                 if (!s.isEmpty()) {
