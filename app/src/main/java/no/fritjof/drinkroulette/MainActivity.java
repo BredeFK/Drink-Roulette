@@ -1,5 +1,6 @@
 package no.fritjof.drinkroulette;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         // Get view elements
         Button generate = findViewById(R.id.btnGenerate);
         final TextView number = findViewById(R.id.txtRandNumber);
+        final MediaPlayer sound = MediaPlayer.create(MainActivity.this, R.raw.glassping);
 
         // Set on click listener
         generate.setOnClickListener(new View.OnClickListener() {
@@ -38,12 +40,12 @@ public class MainActivity extends AppCompatActivity {
 
                 // Make sure input is not empty
                 if (!s.isEmpty()) {
-
                     // Clear previous list and add new items
                     items.clear();
                     items.addAll(Arrays.asList(s.split(",")));
 
                     number.setText(items.get(getRandomNumber()));
+                    sound.start();
                 }
             }
         });
@@ -73,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
             return n;
         }
 
-        // If more than 2, make sure the new number is not the same as last TODO : add sound to better indicate new drink
+        // If more than 2, make sure the new number is not the same as last
         while (n == lastNumb) {
             n = random.nextInt(length);
         }
