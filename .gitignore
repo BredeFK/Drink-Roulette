@@ -78,3 +78,10 @@ obj/
 target
 /bin/
 /target/
+
+# Gradle
+
+build.gradle
+.gradle/
+gradle/
+
