@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         final String input = preferences.getString("stringArray", "");
 
         // Fill in previous input if it exists
-        if(!input.isEmpty()){
+        if (!input.isEmpty()) {
             editItems.setText(input);
         }
 
